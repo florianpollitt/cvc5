@@ -89,16 +89,13 @@ CadicalSolver::CadicalSolver(Env& env,
 
 void CadicalSolver::initialize()
 {
-  d_solver->set("factor", 0);
-  d_solver->set("factorcheck", 0);
-
   // walk and lucky phase do not use the external propagator, disable for now
   if (d_propagator)
   {
     d_solver->set("walk", 0);
     d_solver->set("lucky", 0);
     d_solver->set("report", 1);
-    d_solver->set("stats", 3);
+    d_solver->set("stats", 1);
     d_solver->connect_fixed_listener(d_propagator.get());
     d_solver->connect_external_propagator(d_propagator.get());
     d_solver->build(stdout, "c ");
