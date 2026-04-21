@@ -21,8 +21,8 @@ find_library(CaDiCaL_LIBRARIES NAMES cadical)
 set(CaDiCaL_FOUND_SYSTEM FALSE)
 if(CaDiCaL_INCLUDE_DIR AND CaDiCaL_LIBRARIES)
 
-  # Generate our version check file in PROJECT_BINARY_DIR
-  set(CaDiCaL_version_src "${PROJECT_BINARY_DIR}/CaDiCaL_version.cpp")
+  # Generate our version check file in CMAKE_BINARY_DIR
+  set(CaDiCaL_version_src "${CMAKE_BINARY_DIR}/CaDiCaL_version.cpp")
   file(WRITE ${CaDiCaL_version_src}
     "
     #include <cadical/cadical.hpp>
@@ -48,7 +48,7 @@ if(CaDiCaL_INCLUDE_DIR AND CaDiCaL_LIBRARIES)
   # Try to compile and run our version file
   try_run(RUN_RESULT_VAR
     COMPILE_RESULT_VAR
-    ${PROJECT_BINARY_DIR}
+    ${CMAKE_BINARY_DIR}
     ${CaDiCaL_version_src}
     LINK_LIBRARIES ${CaDiCaL_LIBRARIES}
     RUN_OUTPUT_VARIABLE CaDiCaL_VERSION
@@ -84,13 +84,13 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
   include(CheckSymbolExists)
   include(ExternalProject)
 
-  set(CaDiCaL_VERSION "rel-2.1.3-elevate")
-  set(CaDiCaL_CHECKSUM "15e1e82f7f9a9da0e97070cb8ac41d5b32139f65d54f72d2ff84849b0466ef92")
+  set(CaDiCaL_VERSION "development")
+  set(CaDiCaL_CHECKSUM "cb543561602add8d91d69ff3cef84a6b1fbbe16715af989850b62d68237719d4")
 
   # avoid configure script and instantiate the makefile manually the configure
   # scripts unnecessarily fails for cross compilation thus we do the bare
   # minimum from the configure script here
-  set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
+  set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
   if(CMAKE_CROSSCOMPILING_MACOS)
     set(CaDiCaL_CXXFLAGS "${CaDiCaL_CXXFLAGS} -arch ${CMAKE_OSX_ARCHITECTURES}")
   endif()
@@ -125,6 +125,7 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
     set(USE_EMAR  "-e s,ar rc,emar rc,")
   endif()
 
+  set(CaDiCaL_CCCFLAGS "-x c ${CaDiCaL_CXXFLAGS}")
   set(CaDiCaL_SOURCE_DIR <SOURCE_DIR>)
   ExternalProject_Add(
     CaDiCaL-EP
@@ -137,9 +138,13 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
     COMMAND ${CMAKE_COMMAND} -E copy <SOURCE_DIR>/makefile.in
             <SOURCE_DIR>/build/makefile
     COMMAND
-      sed -i.orig -e "s,@CXX@,${CMAKE_CXX_COMPILER}," -e
-      "s,@CXXFLAGS@,${CaDiCaL_CXXFLAGS}," -e
-      "s,@ROOT@,${CaDiCaL_SOURCE_DIR}," -e "s,@CONTRIB@,no," ${USE_EMAR}
+      sed -i.orig
+      -e "s,@CXX@,${CMAKE_CXX_COMPILER},"
+      -e "s,@CC@,${CMAKE_CXX_COMPILER},"
+      -e "s,@CXXFLAGS@,${CaDiCaL_CXXFLAGS},"
+      -e "s,@CFLAGS@,${CaDiCaL_CCCFLAGS},"
+      -e "s,@ROOT@,${CaDiCaL_SOURCE_DIR},"
+      -e "s,@CONTRIB@,no," ${USE_EMAR}
       <SOURCE_DIR>/build/makefile
     BUILD_COMMAND ${make_cmd} -C <SOURCE_DIR>/build libcadical.a
     INSTALL_COMMAND ${CMAKE_COMMAND} -E copy <SOURCE_DIR>/build/libcadical.a

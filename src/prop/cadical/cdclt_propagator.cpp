@@ -11,6 +11,8 @@
  */
 #include "prop/cadical/cdclt_propagator.h"
 
+#include "prop/sat_solver_types.h"
+
 namespace cvc5::internal::prop::cadical {
 
 CadicalPropagator::CadicalPropagator(prop::TheoryProxy* proxy,
@@ -320,7 +322,10 @@ int CadicalPropagator::cb_decide()
       }
     }
     Trace("cadical::propagator") << "cb::decide: " << lit << std::endl;
-    return toCadicalLit(lit);
+    if (value(lit) == SAT_VALUE_UNKNOWN)
+      return toCadicalLit(lit);
+    else
+      return 0;
   }
   Trace("cadical::propagator") << "cb::decide: 0" << std::endl;
   return 0;
