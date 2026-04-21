@@ -89,8 +89,8 @@ CadicalSolver::CadicalSolver(Env& env,
 void CadicalSolver::initialize()
 {
   // d_solver->set("quiet", 1);  // CaDiCaL is verbose by default
-  d_solver->set("factor", 0);
-  d_solver->set("factorcheck", 0);
+  // d_solver->set("factor", 0);
+  // d_solver->set("factorcheck", 0);
 
   // walk and lucky phase do not use the external propagator, disable for now
   if (d_propagator)
