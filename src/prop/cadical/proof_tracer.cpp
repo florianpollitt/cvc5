@@ -61,6 +61,7 @@ void ProofTracer::add_original_clause(int64_t clause_id,
 
 void ProofTracer::add_derived_clause(CVC5_UNUSED int64_t clause_id,
                                      bool redundant,
+                                     int,
                                      const std::vector<int>& clause,
                                      const std::vector<int64_t>& antecedents)
 {
