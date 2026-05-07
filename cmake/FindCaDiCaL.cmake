@@ -85,7 +85,7 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
   include(ExternalProject)
 
   set(CaDiCaL_VERSION "no-tify")
-  set(CaDiCaL_CHECKSUM "945fdd15cd68825292e4dc4bde32e1ecc05b690073c76ccf3497c3c835600beb")
+  set(CaDiCaL_CHECKSUM "3a9890fffc62e20889f95adaa246093756be59069c7f83a8479f803d7804c916")
 
   # avoid configure script and instantiate the makefile manually the configure
   # scripts unnecessarily fails for cross compilation thus we do the bare
