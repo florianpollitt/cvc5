@@ -84,16 +84,19 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
   include(CheckSymbolExists)
   include(ExternalProject)
 
-  set(CaDiCaL_VERSION "no-tify")
-  set(CaDiCaL_CHECKSUM "3a9890fffc62e20889f95adaa246093756be59069c7f83a8479f803d7804c916")
-
   # avoid configure script and instantiate the makefile manually the configure
   # scripts unnecessarily fails for cross compilation thus we do the bare
   # minimum from the configure script here
+  set(CaDiCaL_VERSION "no-tify")
+  set(CaDiCaL_CHECKSUM "d4044acfca970b17236772d4283393c40bea4d13bf7ae7c72adcb0691f574114")
+  # DEBUG Build
+  # set(CaDiCaL_CXXFLAGS "-fPIC -g -DLOGGING -std=c++11")
+  # RELEASE Build
+   set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
+  # QUIET Build
+  # set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
+
   
-  #set(CaDiCaL_CXXFLAGS "-fPIC -g -DLOGGING -std=c++11")
-  
-  set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
   if(CMAKE_CROSSCOMPILING_MACOS)
     set(CaDiCaL_CXXFLAGS "${CaDiCaL_CXXFLAGS} -arch ${CMAKE_OSX_ARCHITECTURES}")
   endif()
