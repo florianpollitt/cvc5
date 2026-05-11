@@ -108,7 +108,7 @@ void CadicalPropagator::notify_fixed_assignment(int lit)
     return;
   }
   // TODO: cadical needs to notify backtrack before notify_fixed...
-  // return;
+  return;
   ++d_stats.notifyFixedAssignment;
 
   Trace("cadical::propagator")
