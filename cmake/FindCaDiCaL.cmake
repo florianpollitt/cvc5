@@ -85,14 +85,18 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
   include(ExternalProject)
 
   set(CaDiCaL_VERSION "development")
-  set(CaDiCaL_CHECKSUM "4b4cd76c38afc965f872455ad6fd06494d1e0801f63488be2aaed4f6b3ccd365")
+  set(CaDiCaL_CHECKSUM "c1180d0223d7ec53b4ec35e7b4500a2ccb183e4331059f3ef9517501e9f344c8")
 
   # avoid configure script and instantiate the makefile manually the configure
   # scripts unnecessarily fails for cross compilation thus we do the bare
   # minimum from the configure script here
   
+  # Release Build
   #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
+  # Debug Build
   set(CaDiCaL_CXXFLAGS "-fPIC -DLOGGING -std=c++11")
+  # Quiet Build
+  #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
   
   if(CMAKE_CROSSCOMPILING_MACOS)
     set(CaDiCaL_CXXFLAGS "${CaDiCaL_CXXFLAGS} -arch ${CMAKE_OSX_ARCHITECTURES}")
