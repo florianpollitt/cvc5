@@ -106,6 +106,7 @@ void CadicalPropagator::notify_fixed_assignment(int lit)
   {
     return;
   }
+  return;
   ++d_stats.notifyFixedAssignment;
 
   Trace("cadical::propagator")
