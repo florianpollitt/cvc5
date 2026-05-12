@@ -206,9 +206,11 @@ bool CadicalPropagator::cb_check_found_model(
     // don't have a reason clause for rejecting the model. CaDiCaL's
     // expectation will be weakened in the future to allow for this, but for
     // now we simply add a tautology as reason to pacify CaDiCaL.
+    /*
     d_new_clauses.push_back(1);
     d_new_clauses.push_back(-1);
     d_new_clauses.push_back(0);
+    */
     return false;
   }
 
@@ -269,9 +271,11 @@ bool CadicalPropagator::cb_check_found_model(
     // Same as above, until CaDiCaL's assertion that we have to have
     // a reason clause for rejecting the model is weakened, we need to
     // pacify it with a tautology.
+    /*
     d_new_clauses.push_back(1);
     d_new_clauses.push_back(-1);
     d_new_clauses.push_back(0);
+    */
     return false;
   }
   bool res = done();
