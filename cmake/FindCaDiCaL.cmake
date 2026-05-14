@@ -85,16 +85,16 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
   include(ExternalProject)
 
   set(CaDiCaL_VERSION "development")
-  set(CaDiCaL_CHECKSUM "c8bdaa7941b88e9ab4a9a1a7ca17b6bc16a27978569a70d2efbf8f210e9e2e54")
+  set(CaDiCaL_CHECKSUM "cf9627a7791b0fea0c194c1ba4f2eb27e9bc700ed0b4b9b55adb6a05fbb25db0")
 
   # avoid configure script and instantiate the makefile manually the configure
   # scripts unnecessarily fails for cross compilation thus we do the bare
   # minimum from the configure script here
   
   # Release Build
-  #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
+  set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
   # Debug Build
-  set(CaDiCaL_CXXFLAGS "-fPIC -DLOGGING -std=c++11")
+  # set(CaDiCaL_CXXFLAGS "-fPIC -DLOGGING -std=c++11")
   # Quiet Build
   #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
   

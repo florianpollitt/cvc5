@@ -99,6 +99,8 @@ void CadicalSolver::initialize()
     d_solver->set("lucky", 0);
     d_solver->set("report", 1);
     d_solver->set("stats", 3);
+    // d_solver->set("extnassign", 1);
+    // d_solver->set("extnbacktrack", 1);
     d_solver->connect_fixed_listener(d_propagator.get());
     d_solver->connect_external_propagator(d_propagator.get());
     d_solver->build(stdout, "c ");
