@@ -92,6 +92,7 @@ void CadicalSolver::initialize()
   // walk and lucky phase do not use the external propagator, disable for now
   if (d_propagator)
   {
+    d_solver->prefix("c up ");
     d_solver->set("walk", 0);
     d_solver->set("lucky", 0);
     d_solver->set("report", 1);
@@ -104,7 +105,12 @@ void CadicalSolver::initialize()
     d_solver->options();
   }
   else
-    d_solver->set("quiet", 1);  // CaDiCaL is verbose by default
+  {
+    d_solver->prefix("c bv ");
+    // d_solver->set("quiet", 1);  // CaDiCaL is verbose by default
+    d_solver->set("report", 1);
+    d_solver->set("stats", 3);
+  }
 
   d_true = newVar(false, true);
   d_false = newVar(false, true);
@@ -185,6 +191,10 @@ SatValue CadicalSolver::_solve(const std::vector<SatLiteral>& assumptions)
     Assert(res != SAT_VALUE_TRUE || d_propagator->done());
     Trace("cadical::propagator") << "solve done: " << res << std::endl;
     d_propagator->in_search(false);
+  }
+  else
+  {
+    // d_solver->statistics();
   }
   ++d_statistics.d_numSatCalls;
   d_inSatMode = (res == SAT_VALUE_TRUE);
