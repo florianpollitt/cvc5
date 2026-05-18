@@ -11,7 +11,6 @@
  */
 #include "prop/cadical/cdclt_propagator.h"
 
-#include "prop/cadical/util.h"
 #include "prop/sat_solver_types.h"
 
 namespace cvc5::internal::prop::cadical {
@@ -107,7 +106,6 @@ void CadicalPropagator::notify_fixed_assignment(int lit)
   {
     return;
   }
-  // TODO: cadical needs to notify backtrack before notify_fixed...
   return;
   ++d_stats.notifyFixedAssignment;
 
