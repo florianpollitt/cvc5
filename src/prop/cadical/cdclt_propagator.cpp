@@ -308,7 +308,7 @@ int CadicalPropagator::cb_decide()
       Trace("cadical::propagator") << "No solution found yet" << std::endl;
     }
   }
-  if (!stopSearch && lit != undefSatLiteral)
+  while (!stopSearch && lit != undefSatLiteral)
   {
     if (!requirePhase)
     {
@@ -326,7 +326,7 @@ int CadicalPropagator::cb_decide()
     if (value(lit) == SAT_VALUE_UNKNOWN)
       return toCadicalLit(lit);
     else
-      return 0;
+      lit = d_proxy->getNextDecisionRequest(requirePhase, stopSearch);
   }
   Trace("cadical::propagator") << "cb::decide: 0" << std::endl;
   return 0;
