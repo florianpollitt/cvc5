@@ -92,6 +92,7 @@ void CadicalSolver::initialize()
   // walk and lucky phase do not use the external propagator, disable for now
   if (d_propagator)
   {
+    d_solver->build(stdout, "c up ");
     d_solver->prefix("c up ");
     d_solver->set("walk", 0);
     d_solver->set("lucky", 0);
@@ -101,20 +102,21 @@ void CadicalSolver::initialize()
     // d_solver->set("extnbacktrack", 1);
     d_solver->connect_fixed_listener(d_propagator.get());
     d_solver->connect_external_propagator(d_propagator.get());
-    d_solver->build(stdout, "c ");
-    d_solver->options();
   }
   else
   {
     // d_solver->set("quiet", 1);  // CaDiCaL is verbose by default
+    d_solver->build(stdout, "c bv ");
     d_solver->prefix("c bv ");
     d_solver->set("report", 1);
     d_solver->set("stats", 3);
-    // d_solver->set("lucky", 0); // this might be part of the regression
+    d_solver->set("lucky", 0);  // this might be part of the regression
   }
 
   d_solver->set("factor", 0);
   d_solver->set("factorcheck", 0);
+
+  d_solver->options();
 
   d_true = newVar(false, true);
   d_false = newVar(false, true);
