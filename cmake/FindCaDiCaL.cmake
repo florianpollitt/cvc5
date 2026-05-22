@@ -85,7 +85,7 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
   include(ExternalProject)
 
   set(CaDiCaL_VERSION "development")
-  set(CaDiCaL_CHECKSUM "434813c17784631149f5ab89bc3fc1400a7bfda54a220918261845babcc28c24")
+  set(CaDiCaL_CHECKSUM "4ff6de630fc1c64564b96463408b960bfe828db443f658acd6e7bea02402a730")
 
   # avoid configure script and instantiate the makefile manually the configure
   # scripts unnecessarily fails for cross compilation thus we do the bare
