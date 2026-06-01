@@ -88,13 +88,13 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
   # scripts unnecessarily fails for cross compilation thus we do the bare
   # minimum from the configure script here
   set(CaDiCaL_VERSION "no-tify")
-  set(CaDiCaL_CHECKSUM "e17424ec1b8a2cc282ab8b96c72ab27435d9fe6f7b3c4424e8bceeb73bb3100c")
+  set(CaDiCaL_CHECKSUM "fafee4ddc989c3a33c2bc3c2da6426493acbbca9442d4ba364c68c3003710175")
   # DEBUG Build
   # set(CaDiCaL_CXXFLAGS "-fPIC -g -DLOGGING -std=c++11")
   # RELEASE Build
-  set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
+  #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
   # QUIET Build
-  # set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
+   set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
 
   
   if(CMAKE_CROSSCOMPILING_MACOS)
