@@ -106,7 +106,7 @@ void CadicalPropagator::notify_fixed_assignment(int lit)
   {
     return;
   }
-  return;
+  // return;
   ++d_stats.notifyFixedAssignment;
 
   Trace("cadical::propagator")
@@ -323,10 +323,19 @@ int CadicalPropagator::cb_decide()
       }
     }
     Trace("cadical::propagator") << "cb::decide: " << lit << std::endl;
-    if (value(lit) == SAT_VALUE_UNKNOWN)
-      return toCadicalLit(lit);
-    else
-      lit = d_proxy->getNextDecisionRequest(requirePhase, stopSearch);
+    if (value(lit) == SAT_VALUE_UNKNOWN) return toCadicalLit(lit);
+    return 0;
+    /*
+    else if (value(lit) == SAT_VALUE_FALSE)
+    {
+      SatVariable var = lit.getSatVariable();
+      auto& info = d_var_info[var];
+      const auto level = info.level_intro;
+      if (level) d_solver.force_backtrack(level - 1);
+      return 0;
+    }
+    else lit = d_proxy->getNextDecisionRequest(requirePhase, stopSearch);
+    */
   }
   Trace("cadical::propagator") << "cb::decide: 0" << std::endl;
   return 0;
