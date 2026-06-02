@@ -11,7 +11,6 @@
  */
 #include "prop/cadical/cdclt_propagator.h"
 
-#include "prop/cadical/util.h"
 #include "prop/sat_solver_types.h"
 
 namespace cvc5::internal::prop::cadical {
