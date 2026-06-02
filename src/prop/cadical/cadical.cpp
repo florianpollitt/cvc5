@@ -93,11 +93,14 @@ void CadicalSolver::initialize()
   {
     d_solver->build(stdout, "c up ");
     d_solver->prefix("c up ");
+    // verbose output, mostly for performance debugging
+    d_solver->set("report", 1);
+    d_solver->set("stats", 3);
     // walk and lucky phase do not use the external propagator, disable for now
     d_solver->set("walk", 0);
     d_solver->set("lucky", 0);
-    d_solver->set("report", 1);
-    d_solver->set("stats", 3);
+    // These are mostly for debugging purposes,
+    // but change the notification behaviour of cadical
     // d_solver->set("extnassign", 1);
     // d_solver->set("extnbacktrack", 1);
     d_solver->connect_fixed_listener(d_propagator.get());
@@ -105,15 +108,23 @@ void CadicalSolver::initialize()
   }
   else
   {
-    // d_solver->set("quiet", 1);  // CaDiCaL is verbose by default
+    // CaDiCaL is verbose by default.
+    // To make it quiet we just compile with -DQUIET
+    // d_solver->set("quiet", 1);
     d_solver->build(stdout, "c bv ");
     d_solver->prefix("c bv ");
+    // verbose output, mostly for performance debugging
     d_solver->set("report", 1);
-    d_solver->set("stats", 3);
-    d_solver->set("lucky", 0);  // this might be part of the regression
+    // stats are not printed anyways
+    // d_solver->set("stats", 3);
+    // part of the regression of the bv solver
+    d_solver->set("lucky", 0);
   }
 
-  d_solver->set("factor", 0);
+  // mostly hurts the bv solver on fast instances
+  d_solver->set("preprocesslight", 0);
+
+  d_solver->set("factor", 0);  // not yet supported
   d_solver->set("factorcheck", 0);
 
   d_solver->options();
