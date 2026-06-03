@@ -323,13 +323,14 @@ int CadicalPropagator::cb_decide()
       }
     }
     Trace("cadical::propagator") << "cb::decide: " << lit << std::endl;
-    if (value(lit) == SAT_VALUE_UNKNOWN)
-      return toCadicalLit(lit);
+    if (value(lit) == SAT_VALUE_UNKNOWN) return toCadicalLit(lit);
+    /*
     else if (value(lit) == SAT_VALUE_FALSE)
     {
       if (d_solver.force_unassign(toCadicalLit(lit))) return toCadicalLit(lit);
       return 0;
     }
+    */
     else
       lit = d_proxy->getNextDecisionRequest(requirePhase, stopSearch);
   }
