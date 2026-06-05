@@ -89,7 +89,7 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
   # minimum from the configure script here
   
   set(CaDiCaL_VERSION "development")
-  set(CaDiCaL_CHECKSUM "55c62cfe8fa6b6553524543c7ab59d4483eb144f442606025ff6a3085d439c88")
+  set(CaDiCaL_CHECKSUM "4d62e1ada39e5b6d0730a6d19995680d4d0e4761573297e716f20d3385915a29")
   # Debug Build
   # set(CaDiCaL_CXXFLAGS "-fPIC -DLOGGING -std=c++11")
   # Release Build
