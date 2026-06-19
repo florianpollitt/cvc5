@@ -122,7 +122,7 @@ void CadicalSolver::initialize()
   }
 
   // mostly hurts the bv solver on fast instances
-  d_solver->set("preprocesslight", 0);
+  // d_solver->set("preprocesslight", 0);
 
   d_solver->set("factor", 0);  // not yet supported
   d_solver->set("factorcheck", 0);

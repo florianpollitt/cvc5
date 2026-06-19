@@ -89,13 +89,13 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
   # minimum from the configure script here
   
   set(CaDiCaL_VERSION "development")
-  set(CaDiCaL_CHECKSUM "4d62e1ada39e5b6d0730a6d19995680d4d0e4761573297e716f20d3385915a29")
+  set(CaDiCaL_CHECKSUM "252ecbb2c40770e7c8e29840b7a7b63fb637c60d0192640b7b4e732325eb7347")
   # Debug Build
   # set(CaDiCaL_CXXFLAGS "-fPIC -DLOGGING -std=c++11")
   # Release Build
-  #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
+  set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
   # Quiet Build
-  set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
+  #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
   
   if(CMAKE_CROSSCOMPILING_MACOS)
     set(CaDiCaL_CXXFLAGS "${CaDiCaL_CXXFLAGS} -arch ${CMAKE_OSX_ARCHITECTURES}")
