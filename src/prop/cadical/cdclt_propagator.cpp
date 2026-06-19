@@ -106,7 +106,8 @@ void CadicalPropagator::notify_fixed_assignment(int lit)
   {
     return;
   }
-  return;
+  if (info.assignment != 0 && info.assignment != lit) return;
+
   ++d_stats.notifyFixedAssignment;
 
   Trace("cadical::propagator")
@@ -334,9 +335,10 @@ int CadicalPropagator::cb_decide()
       if (d_solver.force_unassign(toCadicalLit(lit))) return toCadicalLit(lit);
       return 0;
     }
-    */
     else
       lit = d_proxy->getNextDecisionRequest(requirePhase, stopSearch);
+    */
+    return 0;
   }
   Trace("cadical::propagator") << "cb::decide: 0" << std::endl;
   return 0;
