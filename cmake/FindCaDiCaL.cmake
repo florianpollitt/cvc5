@@ -94,7 +94,9 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
   # RELEASE Build
   #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
   # QUIET Build
-   set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
+  #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
+  # Profile build
+   set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -ggdb3 -std=c++11")
 
   
   if(CMAKE_CROSSCOMPILING_MACOS)
