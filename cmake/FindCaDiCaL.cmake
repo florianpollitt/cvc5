@@ -85,18 +85,20 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
   include(ExternalProject)
 
   set(CaDiCaL_VERSION "rel-2.1.3-elevate-new")
-  set(CaDiCaL_CHECKSUM "6b804de277f015abc6687d04d37814d6a29dd5a050f86888122a38d2d417e57b")
+  set(CaDiCaL_CHECKSUM "517b215c63172cf99f62df5a9a41bf06312442aa963d77ff5a7de472dd6fea5b")
 
   # avoid configure script and instantiate the makefile manually the configure
   # scripts unnecessarily fails for cross compilation thus we do the bare
   # minimum from the configure script here
   
   # Release Build
-  #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
+  set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
   # Debug Build
   #set(CaDiCaL_CXXFLAGS "-fPIC -DLOGGING -std=c++11")
   # Quiet Build
-  set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
+  #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
+  # No Tracing + Quiet Build
+  #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -DNTRACING -std=c++11")
   
   if(CMAKE_CROSSCOMPILING_MACOS)
     set(CaDiCaL_CXXFLAGS "${CaDiCaL_CXXFLAGS} -arch ${CMAKE_OSX_ARCHITECTURES}")
