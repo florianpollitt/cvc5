@@ -119,8 +119,10 @@ void CadicalSolver::initialize()
     // d_solver->set("stats", 3);
     // part of the regression of the bv solver
     d_solver->set("lucky", 0);
+    // d_solver->set("inprobeint", 1000);
   }
 
+  // d_solver->set("quiet", 1);
   // mostly hurts the bv solver on fast instances
   d_solver->set("preprocesslight", 0);
 

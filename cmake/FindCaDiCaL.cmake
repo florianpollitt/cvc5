@@ -88,7 +88,7 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
   # scripts unnecessarily fails for cross compilation thus we do the bare
   # minimum from the configure script here
   set(CaDiCaL_VERSION "no-tify")
-  set(CaDiCaL_CHECKSUM "fafee4ddc989c3a33c2bc3c2da6426493acbbca9442d4ba364c68c3003710175")
+  set(CaDiCaL_CHECKSUM "9b0a4fad3c3591a9cc4ff75490553521e631eb84dacfa318fc331a9c2a43c4ce")
   # DEBUG Build
   # set(CaDiCaL_CXXFLAGS "-fPIC -g -DLOGGING -std=c++11")
   # RELEASE Build
