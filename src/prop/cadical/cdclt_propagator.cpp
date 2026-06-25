@@ -335,10 +335,10 @@ int CadicalPropagator::cb_decide()
       if (d_solver.force_unassign(toCadicalLit(lit))) return toCadicalLit(lit);
       return 0;
     }
+    */
     else
       lit = d_proxy->getNextDecisionRequest(requirePhase, stopSearch);
-    */
-    return 0;
+    // return 0;
   }
   Trace("cadical::propagator") << "cb::decide: 0" << std::endl;
   return 0;
