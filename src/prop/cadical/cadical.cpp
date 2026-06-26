@@ -97,7 +97,7 @@ void CadicalSolver::initialize()
     d_solver->set("walk", 0);
     d_solver->set("lucky", 0);
     d_solver->set("report", 1);
-    d_solver->set("stats", 3);
+    // d_solver->set("stats", 3);
     // d_solver->set("elevate", -1);
     // d_solver->set("extnassign", 1);
     // d_solver->set("extnbacktrack", 1);
@@ -111,7 +111,7 @@ void CadicalSolver::initialize()
     d_solver->build(stdout, "c bv ");
     // d_solver->set("quiet", 1);  // CaDiCaL is verbose by default
     d_solver->set("report", 1);
-    d_solver->set("stats", 3);
+    // d_solver->set("stats", 3);
   }
 
   d_true = newVar(false, true);

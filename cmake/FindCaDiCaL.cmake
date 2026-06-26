@@ -94,11 +94,11 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
   # Release Build
   #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
   # Profile Build
-  set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11 -ggdb3")
+  #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11 -ggdb3")
   # Debug Build
   #set(CaDiCaL_CXXFLAGS "-fPIC -DLOGGING -std=c++11")
   # Quiet Build
-  #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
+  set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
   # No Tracing + Quiet Build
   #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -DNTRACING -std=c++11")
   
