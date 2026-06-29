@@ -88,8 +88,8 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
   # scripts unnecessarily fails for cross compilation thus we do the bare
   # minimum from the configure script here
   
-  set(CaDiCaL_VERSION "development")
-  set(CaDiCaL_CHECKSUM "279032bf5a36c575cbff2d99cedf988fd1bcf499562c5b8ca12696b27842bcb5")
+  set(CaDiCaL_VERSION "c8eee32fe")
+  set(CaDiCaL_CHECKSUM "33d105a95d3a4b5042117eb0af8a4fa9e6910c8a8d476878d429f2a91c31b38a")
   # Debug Build
   # set(CaDiCaL_CXXFLAGS "-fPIC -DLOGGING -std=c++11")
   # Release Build

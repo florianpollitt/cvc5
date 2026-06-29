@@ -115,6 +115,7 @@ void CadicalSolver::initialize()
     d_solver->prefix("c bv ");
     // verbose output, mostly for performance debugging
     d_solver->set("report", 1);
+    d_solver->set("stats", 3);
     // stats are not printed anyways
     // d_solver->set("stats", 3);
     // part of the regression of the bv solver
@@ -122,7 +123,7 @@ void CadicalSolver::initialize()
   }
 
   // mostly hurts the bv solver on fast instances
-  // d_solver->set("preprocesslight", 0);
+  d_solver->set("preprocesslight", 0);
 
   d_solver->set("factor", 0);  // not yet supported
   d_solver->set("factorcheck", 0);
