@@ -85,20 +85,20 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
   include(ExternalProject)
 
   set(CaDiCaL_VERSION "rel-2.1.3-elevate-new")
-  set(CaDiCaL_CHECKSUM "517b215c63172cf99f62df5a9a41bf06312442aa963d77ff5a7de472dd6fea5b")
+  set(CaDiCaL_CHECKSUM "00c5b162e240538b8cd3c5f375340081317d1e3d88e2735980e2337892b49900")
 
   # avoid configure script and instantiate the makefile manually the configure
   # scripts unnecessarily fails for cross compilation thus we do the bare
   # minimum from the configure script here
   
   # Release Build
-  #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
+  set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
   # Profile Build
   #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11 -ggdb3")
   # Debug Build
   #set(CaDiCaL_CXXFLAGS "-fPIC -DLOGGING -std=c++11")
   # Quiet Build
-  set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
+  #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
   # No Tracing + Quiet Build
   #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -DNTRACING -std=c++11")
   
