@@ -88,14 +88,14 @@ if(NOT CaDiCaL_FOUND_SYSTEM)
   # scripts unnecessarily fails for cross compilation thus we do the bare
   # minimum from the configure script here
   
-  set(CaDiCaL_VERSION "c8eee32fe")
-  set(CaDiCaL_CHECKSUM "33d105a95d3a4b5042117eb0af8a4fa9e6910c8a8d476878d429f2a91c31b38a")
+  set(CaDiCaL_VERSION "development")
+  set(CaDiCaL_CHECKSUM "2b846b0bddcd4c5c8c1a922f44a9996d6316c294b8a364d1f13819b67f2671ae")
   # Debug Build
   # set(CaDiCaL_CXXFLAGS "-fPIC -DLOGGING -std=c++11")
   # Release Build
-  #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
+  set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -std=c++11")
   # Quiet Build
-  set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
+  #set(CaDiCaL_CXXFLAGS "-fPIC -O3 -DNDEBUG -DQUIET -std=c++11")
   
   if(CMAKE_CROSSCOMPILING_MACOS)
     set(CaDiCaL_CXXFLAGS "${CaDiCaL_CXXFLAGS} -arch ${CMAKE_OSX_ARCHITECTURES}")

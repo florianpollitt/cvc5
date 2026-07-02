@@ -89,6 +89,11 @@ CadicalSolver::CadicalSolver(Env& env,
 
 void CadicalSolver::initialize()
 {
+  // mostly hurts the bv solver on fast instances
+  d_solver->set("preprocesslight", 0);
+
+  d_solver->set("factor", 0);  // not yet supported
+  d_solver->set("factorcheck", 0);
   if (d_propagator)
   {
     d_solver->build(stdout, "c up ");
@@ -121,12 +126,6 @@ void CadicalSolver::initialize()
     // part of the regression of the bv solver
     d_solver->set("lucky", 0);
   }
-
-  // mostly hurts the bv solver on fast instances
-  d_solver->set("preprocesslight", 0);
-
-  d_solver->set("factor", 0);  // not yet supported
-  d_solver->set("factorcheck", 0);
 
   d_solver->options();
 
