@@ -89,6 +89,14 @@ CadicalSolver::CadicalSolver(Env& env,
 
 void CadicalSolver::initialize()
 {
+  // apply options before 'connect' for mobical compatibility
+  // d_solver->set("quiet", 1);
+  // mostly hurts the bv solver on fast instances
+  d_solver->set("preprocesslight", 0);
+
+  d_solver->set("factor", 0);  // not yet supported
+  d_solver->set("factorcheck", 0);
+
   if (d_propagator)
   {
     d_solver->build(stdout, "c up ");
@@ -121,13 +129,6 @@ void CadicalSolver::initialize()
     d_solver->set("lucky", 0);
     // d_solver->set("inprobeint", 1000);
   }
-
-  // d_solver->set("quiet", 1);
-  // mostly hurts the bv solver on fast instances
-  d_solver->set("preprocesslight", 0);
-
-  d_solver->set("factor", 0);  // not yet supported
-  d_solver->set("factorcheck", 0);
 
   d_solver->options();
 
