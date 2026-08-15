@@ -236,6 +236,7 @@ bool CadicalPropagator::cb_check_found_model(
     d_new_clauses.push_back(1);
     d_new_clauses.push_back(-1);
     d_new_clauses.push_back(0);
+    d_new_clauses_forgettable.push_back(true);
     return false;
   }
 
@@ -273,7 +274,8 @@ bool CadicalPropagator::cb_check_found_model(
           << "add propagation reason: " << p << std::endl;
       SatClause clause;
       d_proxy->explainPropagation(p, clause);
-      add_clause(clause);
+      // We explicitly mark propagation reason as not removable.
+      add_clause(clause, false);
     }
     d_propagations.clear();
 
@@ -299,6 +301,7 @@ bool CadicalPropagator::cb_check_found_model(
     d_new_clauses.push_back(1);
     d_new_clauses.push_back(-1);
     d_new_clauses.push_back(0);
+    d_new_clauses_forgettable.push_back(true);
     return false;
   }
   bool res = done();
@@ -423,10 +426,15 @@ int CadicalPropagator::cb_add_reason_clause_lit(int propagated_lit)
   return lit;
 }
 
-bool CadicalPropagator::cb_has_external_clause(bool& is_forgettable)
+bool CadicalPropagator::cb_has_external_clause(bool& forgettable)
 {
   ++d_stats.cbHasExternalClause;
-  is_forgettable = false;
+  forgettable = false;
+  if (!d_new_clauses_forgettable.empty())
+  {
+    Assert(!d_new_clauses.empty());
+    forgettable = d_new_clauses_forgettable.front();
+  }
   return !d_new_clauses.empty();
 }
 
@@ -435,6 +443,12 @@ int CadicalPropagator::cb_add_external_clause_lit()
   ++d_stats.cbAddExternalClauseLit;
   Assert(!d_new_clauses.empty());
   CadicalLit lit = d_new_clauses.front();
+  Assert(!d_new_clauses_forgettable.empty() || !d_in_search);
+  if (lit == 0)
+  {
+    Assert(!d_new_clauses_forgettable.empty());
+    d_new_clauses_forgettable.pop_front();
+  }
   d_new_clauses.pop_front();
   Trace("cadical::propagator")
       << "external_clause: " << toSatLiteral(lit) << std::endl;
@@ -454,7 +468,7 @@ SatValue CadicalPropagator::value(SatLiteral lit) const
   return val;
 }
 
-void CadicalPropagator::add_clause(const SatClause& clause)
+void CadicalPropagator::add_clause(const SatClause& clause, bool forgettable)
 {
   std::vector<CadicalLit> lits;
   // Note: Removable clauses can be added to lower user levels to avoid
@@ -485,6 +499,16 @@ void CadicalPropagator::add_clause(const SatClause& clause)
   }
   if (!lits.empty())
   {
+    if (TraceIsOn("cadical::propagator"))
+    {
+      Trace("cadical::propagator") << "addClause (forgettable: " << forgettable
+                                   << ", in search: " << d_in_search << "):";
+      for (const SatLiteral& lit : clause)
+      {
+        Trace("cadical::propagator") << " " << lit;
+      }
+      Trace("cadical::propagator") << " 0" << std::endl;
+    }
     // Determine activation literal based on max user level of clause.
     SatLiteral alit = activation_lit(max_user_level);
     if (alit != undefSatLiteral)
@@ -497,6 +521,7 @@ void CadicalPropagator::add_clause(const SatClause& clause)
     {
       d_new_clauses.insert(d_new_clauses.end(), lits.begin(), lits.end());
       d_new_clauses.push_back(0);
+      d_new_clauses_forgettable.push_back(forgettable);
     }
     else
     {
@@ -505,6 +530,7 @@ void CadicalPropagator::add_clause(const SatClause& clause)
         d_solver.add(lit);
       }
       d_solver.add(0);
+      Assert(!forgettable);
     }
   }
   // // Add empty clause
