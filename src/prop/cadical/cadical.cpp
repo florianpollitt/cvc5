@@ -100,7 +100,7 @@ void CadicalSolver::initialize()
     d_solver->set("lucky", 0);
     d_solver->set("ilb", 0);
     d_solver->set("ilbassumptions", 0);
-    d_solver->set("elevate", -1);
+    d_solver->set("elevate", 2);
     d_solver->connect_fixed_listener(d_propagator.get());
     d_solver->connect_external_propagator(d_propagator.get());
     d_solver->build(stdout, "c ");
