@@ -84,6 +84,9 @@ enum class InferenceId
   ARITH_CONF_UNATE_PROP,
   // introduces split on a disequality
   ARITH_SPLIT_DEQ,
+  // states the equivalence of two atoms that correspond to the same internal
+  // constraint, e.g. (= (= x 0) (= (to_real x) 0.0)) for integer x
+  ARITH_EQUIV_ATOM,
   // tighten integer inequalities to ceiling
   ARITH_TIGHTEN_CEIL,
   // tighten integer inequalities to floor
@@ -112,6 +115,9 @@ enum class InferenceId
   ARITH_NL_CONGRUENCE,
   // for theory combination when NL model construction identifies shared terms
   ARITH_NL_SHARED_TERM_SPLIT,
+  // for theory combination when NL has a multiplication term with factors that
+  // are not preregistered.
+  ARITH_NL_SHARED_TERM_FACTOR_SPLIT,
   // checkModel found a conflict with a quadratic equality
   ARITH_NL_CM_QUADRATIC_EQ,
   //-------------------- nonlinear incremental linearization solver
@@ -183,8 +189,6 @@ enum class InferenceId
   ARITH_NL_POW2_VALUE_REFINE,
   // monotonicity refinements (Pow2Solver::checkFullRefine)
   ARITH_NL_POW2_MONOTONE_REFINE,
-  // neg refinements (Pow2Solver::checkFullRefine)
-  ARITH_NL_POW2_NEG_REFINE,
   // div0 refinements (Pow2Solver::checkFullRefine)
   ARITH_NL_POW2_DIV0_CASE_REFINE,
   // lower bound refinements (Pow2Solver::checkFullRefine)
@@ -607,8 +611,8 @@ enum class InferenceId
   SETS_RELS_TABLE_JOIN_DOWN,
   SETS_RELS_PRODUCE_COMPOSE,
   SETS_RELS_PRODUCT_SPLIT,
-  SETS_RELS_TCLOSURE_FWD,
   SETS_RELS_TCLOSURE_UP,
+  SETS_RELS_TCLOSURE_DOWN,
   SETS_RELS_TRANSPOSE_EQ,
   SETS_RELS_TRANSPOSE_REV,
   SETS_RELS_TUPLE_REDUCTION,

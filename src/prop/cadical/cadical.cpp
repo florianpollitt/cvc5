@@ -79,10 +79,13 @@ CadicalSolver::CadicalSolver(Env& env,
     : EnvObj(env),
       d_solver(new CaDiCaL::Solver()),
       d_context(context()),
+      d_propagateOnly(false),
       // Note: CaDiCaL variables start with index 1 rather than 0 since negated
       //       literals are represented as the negation of the index.
       d_nextVarIdx(1),
       d_inSatMode(false),
+      d_true(undefSatVariable),
+      d_false(undefSatVariable),
       d_statistics(registry, name)
 {
 }
@@ -172,7 +175,6 @@ SatValue CadicalSolver::_solve(const std::vector<SatLiteral>& assumptions)
       d_solver->assume(toCadicalLit(~lit));
     }
   }
-  SatValue res;
   for (const SatLiteral& lit : assumptions)
   {
     if (d_propagator)
@@ -186,7 +188,8 @@ SatValue CadicalSolver::_solve(const std::vector<SatLiteral>& assumptions)
   {
     d_propagator->in_search(true);
   }
-  res = toSatValue(d_solver->solve());
+  const SatValue res =
+      toSatValue(d_propagateOnly ? d_solver->propagate() : d_solver->solve());
   if (d_propagator)
   {
     d_solver->statistics();
@@ -199,6 +202,7 @@ SatValue CadicalSolver::_solve(const std::vector<SatLiteral>& assumptions)
     // d_solver->statistics();
   }
   ++d_statistics.d_numSatCalls;
+  d_propagateOnly = false;
   d_inSatMode = (res == SAT_VALUE_TRUE);
   return res;
 }
@@ -223,7 +227,7 @@ ClauseId CadicalSolver::addClause(const SatClause& clause, bool removable)
   }
   if (d_propagator)
   {
-    d_propagator->add_clause(clause);
+    d_propagator->add_clause(clause, removable);
   }
   else
   {
@@ -266,7 +270,7 @@ SatValue CadicalSolver::solve(const std::vector<SatLiteral>& assumptions)
 
 bool CadicalSolver::setPropagateOnly()
 {
-  d_solver->limit("decisions", 0); /* Gets reset after next solve() call. */
+  d_propagateOnly = true;
   return true;
 }
 

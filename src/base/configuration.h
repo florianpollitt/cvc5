@@ -41,12 +41,13 @@ static constexpr bool isStatisticsBuild()
 /**
  * Represents the (static) configuration of cvc5.
  */
-class CVC5_EXPORT Configuration
+class CVC5_EXPORT Configuration final
 {
- private:
-  /** Private default ctor: Disallow construction of this class */
-  Configuration();
+ public:
+  /** Delete default ctor: Disallow construction of this class. */
+  Configuration() = delete;
 
+ private:
   // these constants are filled in by the build system
   static const bool GIT_BUILD;
   static const bool CVC5_IS_RELEASE;
@@ -91,6 +92,8 @@ class CVC5_EXPORT Configuration
 
   static std::string about();
 
+  static std::string aboutAndCopyright();
+
   static bool licenseIsGpl();
 
   static bool isBuiltWithGmp();
@@ -108,6 +111,8 @@ class CVC5_EXPORT Configuration
   static bool isBuiltWithPoly();
 
   static bool isBuiltWithCoCoA();
+
+  static bool isBuiltWithNormaliz();
 
   static bool isBuiltWithPortfolio();
 
